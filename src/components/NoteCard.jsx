@@ -1,11 +1,12 @@
 import { useRef, useEffect, useState } from "react";
-import { setNewOffset, autoGrow, setZIndex } from '../utils.js'
+import { setNewOffset, autoGrow, setZIndex } from '../utils.js';
 import Trash from "../assets/icons/Trash.jsx";
 
 const NoteCard = ({ note }) => {
-    const [position, setPosition] = useState(JSON.parse(note.position));
-    const colors = JSON.parse(note.colors);
-    const body = JSON.parse(note.body);
+    // Załóżmy, że note.position, note.colors i note.body są już obiektami
+    const [position, setPosition] = useState(note.position || { x: 0, y: 0 });
+    const colors = note.colors || {};
+    const body = note.body || "";
 
     let mouseStartPos = { x: 0, y: 0 };
 
@@ -53,7 +54,6 @@ const NoteCard = ({ note }) => {
                 top: `${position.y}px`
             }}
         >
-
             <div
                 onMouseDown={mouseDown}
                 className="card-header"
@@ -75,7 +75,6 @@ const NoteCard = ({ note }) => {
                     }}
                 ></textarea>
             </div>
-
         </div>
     )
 }
